@@ -50,6 +50,12 @@ export default function PokemonLandingPage() {
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedType, setSelectedType] = useState("all")
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalCount, setTotalCount] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
+  const cardsPerPage = 24
 
   const pokemonTypes = [
     "all", "Fire", "Water", "Grass", "Electric", "Psychic", 
@@ -61,7 +67,9 @@ export default function PokemonLandingPage() {
     const fetchCards = async () => {
       try {
         setLoading(true)
-        let url = 'https://api.pokemontcg.io/v2/cards?pageSize=20&orderBy=-set.releaseDate'
+        const pageParam = `&page=${currentPage}`
+        const pageSizeParam = `&pageSize=${cardsPerPage}`
+        let url = `https://api.pokemontcg.io/v2/cards?orderBy=-set.releaseDate${pageSizeParam}${pageParam}`
         
         if (searchTerm) {
           url += `&q=name:${searchTerm}`
@@ -72,8 +80,10 @@ export default function PokemonLandingPage() {
         const response = await fetch(url)
         const data = await response.json()
         
-                 if (data.data) {
-           setCards(data.data.filter((card: PokemonCard) => card.images?.small))
+        if (data.data) {
+          setCards(data.data.filter((card: PokemonCard) => card.images?.small))
+          setTotalCount(data.totalCount || 0)
+          setTotalPages(Math.ceil((data.totalCount || 0) / cardsPerPage))
         }
       } catch (error) {
         console.error('Failed to fetch cards:', error)
@@ -83,11 +93,42 @@ export default function PokemonLandingPage() {
     }
 
     fetchCards()
+  }, [searchTerm, selectedType, currentPage])
+
+  // Reset to page 1 when search/filter changes
+  useEffect(() => {
+    setCurrentPage(1)
   }, [searchTerm, selectedType])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     // Search is handled by useEffect
+  }
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const generatePageNumbers = () => {
+    const pages: number[] = []
+    const maxVisible = 5
+    
+    if (totalPages <= maxVisible) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i)
+      }
+    } else {
+      if (currentPage <= 3) {
+        pages.push(1, 2, 3, 4, 5)
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages)
+      } else {
+        pages.push(currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2)
+      }
+    }
+    
+    return pages
   }
 
   return (
@@ -169,8 +210,8 @@ export default function PokemonLandingPage() {
                     <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-purple-800/50 to-blue-800/50 backdrop-blur-sm border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105">
                       {/* Holographic Border Effect */}
                       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{
-                          background: `
+        style={{
+          background: `
                             linear-gradient(45deg,
                               hsl(280, 100%, 60%),
                               hsl(200, 100%, 50%),
@@ -220,6 +261,77 @@ export default function PokemonLandingPage() {
                 </Link>
               ))}
             </div>
+            
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                {/* Page Info */}
+                <div className="text-white/60 text-sm order-2 sm:order-1">
+                  Page {currentPage} of {totalPages} ({totalCount.toLocaleString()} total cards)
+                </div>
+                
+                {/* Pagination Buttons */}
+                <div className="flex items-center gap-1 sm:gap-2 order-1 sm:order-2">
+                  {/* Previous Button */}
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-all text-sm"
+                    aria-label="Previous page"
+                  >
+                    ←
+                  </button>
+                  
+                  {/* Page Numbers */}
+                  <div className="flex gap-1">
+                    {generatePageNumbers().map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`px-3 py-2 rounded-lg border transition-all text-sm ${
+                          currentPage === page
+                            ? 'bg-purple-500 border-purple-500 text-white'
+                            : 'bg-white/10 border-white/20 text-white hover:bg-white/20'
+                        }`}
+                        aria-label={`Go to page ${page}`}
+                        aria-current={currentPage === page ? 'page' : undefined}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+                  
+                  {/* Next Button */}
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-all text-sm"
+                    aria-label="Next page"
+                  >
+                    →
+                  </button>
+                </div>
+                
+                {/* Quick Jump (Desktop Only) */}
+                <div className="hidden lg:flex items-center gap-2 order-3 text-sm">
+                  <span className="text-white/60">Go to:</span>
+                  <input
+                    type="number"
+                    min="1"
+                    max={totalPages}
+                    value={currentPage}
+                    onChange={(e) => {
+                      const page = parseInt(e.target.value)
+                      if (page >= 1 && page <= totalPages) {
+                        handlePageChange(page)
+                      }
+                    }}
+                    className="w-16 px-2 py-1 rounded bg-white/10 border border-white/20 text-white text-center focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    aria-label="Jump to page number"
+                  />
+                </div>
+              </div>
+            )}
             
             {cards.length === 0 && !loading && (
               <div className="text-center py-16">

@@ -39,37 +39,6 @@ export default function PokemonCard() {
   const [cardData, setCardData] = useState<PokemonCard | null>(null)
   const [loading, setLoading] = useState(true)
 
-  // Update document title and meta tags dynamically
-  useEffect(() => {
-    if (cardData) {
-      document.title = `${cardData.name} Holographic Card | Pokémon TCG 3D Viewer`
-      
-      // Update meta description
-      const metaDescription = document.querySelector('meta[name="description"]')
-      if (metaDescription) {
-        metaDescription.setAttribute('content', 
-          `View ${cardData.name} in stunning 3D holographic detail. ${cardData.hp ? `HP: ${cardData.hp}` : ''} ${cardData.types ? `Type: ${cardData.types.join(', ')}` : ''} from ${cardData.set?.name || 'Pokémon TCG'}.`
-        )
-      }
-      
-      // Update Open Graph tags
-      const ogTitle = document.querySelector('meta[property="og:title"]')
-      if (ogTitle) {
-        ogTitle.setAttribute('content', `${cardData.name} - Holographic Pokémon Card`)
-      }
-      
-      const ogDescription = document.querySelector('meta[property="og:description"]')
-      if (ogDescription) {
-        ogDescription.setAttribute('content', `Experience ${cardData.name} with interactive 3D holographic effects`)
-      }
-      
-      const ogImage = document.querySelector('meta[property="og:image"]')
-      if (ogImage && cardData.images?.large) {
-        ogImage.setAttribute('content', cardData.images.large)
-      }
-    }
-  }, [cardData])
-
   // Fetch Pokémon card data
   useEffect(() => {
     const fetchCardData = async () => {
@@ -225,7 +194,7 @@ export default function PokemonCard() {
         <div
           className="absolute inset-0 rounded-2xl pointer-events-none"
           style={{
-            background: `
+            backgroundImage: `
               linear-gradient(
                 ${45 + tiltX * 2}deg,
                 hsl(${280 + tiltY * 2}, 100%, 60%),
@@ -251,7 +220,7 @@ export default function PokemonCard() {
         <div
           className="absolute inset-0 rounded-2xl pointer-events-none opacity-60"
           style={{
-            background: `
+            backgroundImage: `
               radial-gradient(circle at ${25 + tiltX * 2}% ${15 + tiltY * 2}%, rgba(255, 215, 0, 0.8) 1px, transparent 3px),
               radial-gradient(circle at ${75 - tiltX * 2}% ${85 - tiltY * 2}%, rgba(0, 255, 255, 0.7) 1px, transparent 3px),
               radial-gradient(circle at ${45 + tiltX}% ${35 + tiltY}%, rgba(255, 105, 180, 0.6) 1px, transparent 3px),
@@ -269,7 +238,7 @@ export default function PokemonCard() {
         <div
           className="absolute inset-0 rounded-2xl pointer-events-none opacity-40"
           style={{
-            background: `
+            backgroundImage: `
               linear-gradient(${60 + tiltX * 3}deg, 
                 transparent 10%,
                 rgba(255, 0, 150, 0.4) 25%,
@@ -288,7 +257,7 @@ export default function PokemonCard() {
         <div
           className="absolute inset-0 rounded-2xl pointer-events-none"
           style={{
-            background: `
+            backgroundImage: `
               linear-gradient(
                 ${135 + tiltX * 4}deg,
                 transparent 20%,
@@ -306,7 +275,7 @@ export default function PokemonCard() {
         <div
           className="absolute inset-0 rounded-2xl pointer-events-none opacity-30"
           style={{
-            background: `
+            backgroundImage: `
               conic-gradient(
                 from ${tiltX * 6}deg at ${50 + tiltX / 4}% ${50 + tiltY / 4}%,
                 transparent 0deg,
