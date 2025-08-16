@@ -190,47 +190,132 @@ export default function PokemonCard() {
           }}
         />
 
-        {/* Holographic Rainbow Border Overlay */}
+        {/* Holographic Rainbow Border Overlay - Enhanced Glow */}
         <div
           className="absolute inset-0 rounded-2xl pointer-events-none"
           style={{
             backgroundImage: `
               linear-gradient(
-                ${45 + tiltX * 2}deg,
-                hsl(${280 + tiltY * 2}, 100%, 60%),
-                hsl(${200 - tiltY * 2}, 100%, 50%),
-                hsl(${120 + tiltX * 2}, 100%, 60%),
-                hsl(${60 - tiltX * 2}, 100%, 55%),
-                hsl(${320 + tiltY * 2}, 100%, 65%)
+                ${45 + tiltX * 3}deg,
+                hsl(${300 + tiltY * 3}, 100%, 75%),
+                hsl(${240 - tiltY * 3}, 100%, 70%),
+                hsl(${180 + tiltX * 3}, 100%, 75%),
+                hsl(${120 - tiltX * 3}, 100%, 70%),
+                hsl(${60 + tiltY * 3}, 100%, 75%),
+                hsl(${0 - tiltY * 3}, 100%, 70%),
+                hsl(${300 + tiltX * 3}, 100%, 75%)
               )
             `,
-            backgroundSize: "400% 400%",
-            backgroundPosition: `${50 + tiltX}% ${50 + tiltY}%`,
+            backgroundSize: "600% 600%",
+            backgroundPosition: `${50 + tiltX * 1.5}% ${50 + tiltY * 1.5}%`,
             mask: `
-              radial-gradient(circle at center, transparent 85%, black 88%, black 100%)
+              radial-gradient(circle at center, transparent 100%, black 100%, black 100%)
             `,
             WebkitMask: `
-              radial-gradient(circle at center, transparent 85%, black 88%, black 100%)
+              radial-gradient(circle at center, transparent 100%, black 100%, black 100%)
             `,
             opacity: 0.8,
+            boxShadow: `
+              inset 0 0 30px rgba(255, 255, 255, 0.4),
+              0 0 25px hsl(${280 + tiltY * 2}, 100%, 65%),
+              0 0 50px hsl(${200 - tiltY * 2}, 100%, 55%),
+              0 0 75px hsl(${120 + tiltX * 2}, 100%, 65%),
+              0 0 100px hsl(${60 - tiltX * 2}, 100%, 60%)
+            `,
           }}
         />
 
-        {/* Holographic Sparkles Overlay */}
+        {/* Additional Rainbow Glow Layer */}
         <div
-          className="absolute inset-0 rounded-2xl pointer-events-none opacity-60"
+          className="absolute inset-0 rounded-2xl pointer-events-none"
           style={{
             backgroundImage: `
-              radial-gradient(circle at ${25 + tiltX * 2}% ${15 + tiltY * 2}%, rgba(255, 215, 0, 0.8) 1px, transparent 3px),
-              radial-gradient(circle at ${75 - tiltX * 2}% ${85 - tiltY * 2}%, rgba(0, 255, 255, 0.7) 1px, transparent 3px),
-              radial-gradient(circle at ${45 + tiltX}% ${35 + tiltY}%, rgba(255, 105, 180, 0.6) 1px, transparent 3px),
-              radial-gradient(circle at ${15 - tiltX}% ${65 + tiltY * 2}%, rgba(50, 205, 50, 0.7) 1px, transparent 3px),
-              radial-gradient(circle at ${85 + tiltX * 2}% ${25 - tiltY}%, rgba(255, 69, 0, 0.8) 1px, transparent 3px),
-              radial-gradient(circle at ${35 - tiltX}% ${75 + tiltY}%, rgba(138, 43, 226, 0.6) 1px, transparent 3px),
-              radial-gradient(circle at ${60 + tiltX}% ${45 - tiltY}%, rgba(255, 20, 147, 0.7) 1px, transparent 3px),
-              radial-gradient(circle at ${20 - tiltX}% ${80 + tiltY}%, rgba(0, 191, 255, 0.6) 1px, transparent 3px)
+              linear-gradient(
+                ${135 + tiltX * 4}deg,
+                hsla(${320 + tiltY * 4}, 100%, 80%, 0.7),
+                hsla(${260 - tiltY * 4}, 100%, 75%, 0.9),
+                hsla(${200 + tiltX * 4}, 100%, 80%, 0.7),
+                hsla(${140 - tiltX * 4}, 100%, 75%, 0.9),
+                hsla(${80 + tiltY * 4}, 100%, 80%, 0.7),
+                hsla(${20 - tiltY * 4}, 100%, 75%, 0.9),
+                hsla(${320 + tiltX * 4}, 100%, 80%, 0.7)
+              )
             `,
-            backgroundSize: "15px 15px, 20px 20px, 25px 25px, 30px 30px, 18px 18px, 22px 22px, 28px 28px, 35px 35px",
+            backgroundSize: "500% 500%",
+            backgroundPosition: `${60 + tiltX * 2}% ${40 + tiltY * 2}%`,
+            mask: `
+              radial-gradient(circle at center, transparent 100%, black 100%, black 100%, transparent 100%)
+            `,
+            WebkitMask: `
+              radial-gradient(circle at center, transparent 100%, black 100%, black 100%, transparent 100%)
+            `,
+            opacity: 0.6,
+            filter: 'blur(1.5px)',
+          }}
+        />
+
+        {/* Intense Rainbow Pulse Layer */}
+        <div
+          className="absolute inset-0 rounded-2xl pointer-events-none"
+          style={{
+            backgroundImage: `
+              conic-gradient(
+                from ${tiltX * 8}deg at 50% 50%,
+                hsl(${0 + tiltY * 6}, 100%, 70%) 0deg,
+                hsl(${60 + tiltX * 6}, 100%, 75%) 60deg,
+                hsl(${120 - tiltY * 6}, 100%, 70%) 120deg,
+                hsl(${180 + tiltX * 6}, 100%, 75%) 180deg,
+                hsl(${240 - tiltY * 6}, 100%, 70%) 240deg,
+                hsl(${300 + tiltX * 6}, 100%, 75%) 300deg,
+                hsl(${0 + tiltY * 6}, 100%, 70%) 360deg
+              )
+            `,
+            mask: `
+              radial-gradient(circle at center, transparent 100%, black 100%, black 100%, transparent 100%)
+            `,
+            WebkitMask: `
+              radial-gradient(circle at center, transparent 100%, black 100%, black 100%, transparent 100%)
+            `,
+            opacity: 0.4,
+            filter: 'blur(2px)',
+            animation: 'pulse 2s ease-in-out infinite alternate',
+          }}
+        />
+
+        {/* Holographic Stars Overlay */}
+        <div
+          className="absolute inset-0 rounded-2xl pointer-events-none opacity-75"
+          style={{
+            backgroundImage: `
+              linear-gradient(0deg, transparent 40%, rgba(255, 215, 0, 1) 50%, transparent 60%),
+              linear-gradient(90deg, transparent 40%, rgba(255, 215, 0, 1) 50%, transparent 60%),
+              linear-gradient(0deg, transparent 40%, rgba(0, 255, 255, 0.9) 50%, transparent 60%),
+              linear-gradient(90deg, transparent 40%, rgba(0, 255, 255, 0.9) 50%, transparent 60%),
+              linear-gradient(0deg, transparent 40%, rgba(255, 105, 180, 0.8) 50%, transparent 60%),
+              linear-gradient(90deg, transparent 40%, rgba(255, 105, 180, 0.8) 50%, transparent 60%),
+              linear-gradient(0deg, transparent 40%, rgba(50, 205, 50, 0.9) 50%, transparent 60%),
+              linear-gradient(90deg, transparent 40%, rgba(50, 205, 50, 0.9) 50%, transparent 60%),
+              linear-gradient(0deg, transparent 40%, rgba(255, 69, 0, 1) 50%, transparent 60%),
+              linear-gradient(90deg, transparent 40%, rgba(255, 69, 0, 1) 50%, transparent 60%),
+              linear-gradient(0deg, transparent 40%, rgba(138, 43, 226, 0.8) 50%, transparent 60%),
+              linear-gradient(90deg, transparent 40%, rgba(138, 43, 226, 0.8) 50%, transparent 60%),
+              linear-gradient(0deg, transparent 40%, rgba(255, 20, 147, 0.9) 50%, transparent 60%),
+              linear-gradient(90deg, transparent 40%, rgba(255, 20, 147, 0.9) 50%, transparent 60%),
+              linear-gradient(0deg, transparent 40%, rgba(0, 191, 255, 0.8) 50%, transparent 60%),
+              linear-gradient(90deg, transparent 40%, rgba(0, 191, 255, 0.8) 50%, transparent 60%)
+            `,
+            backgroundSize: "6px 6px, 6px 6px, 8px 8px, 8px 8px, 10px 10px, 10px 10px, 12px 12px, 12px 12px, 7px 7px, 7px 7px, 9px 9px, 9px 9px, 11px 11px, 11px 11px, 13px 13px, 13px 13px",
+            backgroundPosition: `
+              ${25 + tiltX * 2}% ${15 + tiltY * 2}%, ${25 + tiltX * 2}% ${15 + tiltY * 2}%,
+              ${75 - tiltX * 2}% ${85 - tiltY * 2}%, ${75 - tiltX * 2}% ${85 - tiltY * 2}%,
+              ${45 + tiltX}% ${35 + tiltY}%, ${45 + tiltX}% ${35 + tiltY}%,
+              ${15 - tiltX}% ${65 + tiltY * 2}%, ${15 - tiltX}% ${65 + tiltY * 2}%,
+              ${85 + tiltX * 2}% ${25 - tiltY}%, ${85 + tiltX * 2}% ${25 - tiltY}%,
+              ${35 - tiltX}% ${75 + tiltY}%, ${35 - tiltX}% ${75 + tiltY}%,
+              ${60 + tiltX}% ${45 - tiltY}%, ${60 + tiltX}% ${45 - tiltY}%,
+              ${20 - tiltX}% ${80 + tiltY}%, ${20 - tiltX}% ${80 + tiltY}%
+            `,
+            backgroundRepeat: "no-repeat",
           }}
         />
 
@@ -290,10 +375,10 @@ export default function PokemonCard() {
               )
             `,
             mask: `
-              radial-gradient(circle at center, black 0%, black 70%, transparent 85%)
+              radial-gradient(circle at center, transparent 100%, black 100%, black 100%, transparent 100%)
             `,
             WebkitMask: `
-              radial-gradient(circle at center, black 0%, black 70%, transparent 85%)
+              radial-gradient(circle at center, transparent 100%, black 100%, black 100%, transparent 100%)
             `,
           }}
         />
