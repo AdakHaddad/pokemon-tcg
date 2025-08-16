@@ -284,25 +284,25 @@ export default function PokemonCard() {
 
         {/* Holographic Stars Overlay */}
         <div
-          className="absolute inset-0 rounded-2xl pointer-events-none opacity-75"
+          className="absolute inset-0 rounded-2xl pointer-events-none opacity-95"
           style={{
             backgroundImage: `
-              linear-gradient(0deg, transparent 40%, rgba(255, 215, 0, 1) 50%, transparent 60%),
-              linear-gradient(90deg, transparent 40%, rgba(255, 215, 0, 1) 50%, transparent 60%),
-              linear-gradient(0deg, transparent 40%, rgba(0, 255, 255, 0.9) 50%, transparent 60%),
-              linear-gradient(90deg, transparent 40%, rgba(0, 255, 255, 0.9) 50%, transparent 60%),
-              linear-gradient(0deg, transparent 40%, rgba(255, 105, 180, 0.8) 50%, transparent 60%),
-              linear-gradient(90deg, transparent 40%, rgba(255, 105, 180, 0.8) 50%, transparent 60%),
-              linear-gradient(0deg, transparent 40%, rgba(50, 205, 50, 0.9) 50%, transparent 60%),
-              linear-gradient(90deg, transparent 40%, rgba(50, 205, 50, 0.9) 50%, transparent 60%),
-              linear-gradient(0deg, transparent 40%, rgba(255, 69, 0, 1) 50%, transparent 60%),
-              linear-gradient(90deg, transparent 40%, rgba(255, 69, 0, 1) 50%, transparent 60%),
-              linear-gradient(0deg, transparent 40%, rgba(138, 43, 226, 0.8) 50%, transparent 60%),
-              linear-gradient(90deg, transparent 40%, rgba(138, 43, 226, 0.8) 50%, transparent 60%),
-              linear-gradient(0deg, transparent 40%, rgba(255, 20, 147, 0.9) 50%, transparent 60%),
-              linear-gradient(90deg, transparent 40%, rgba(255, 20, 147, 0.9) 50%, transparent 60%),
-              linear-gradient(0deg, transparent 40%, rgba(0, 191, 255, 0.8) 50%, transparent 60%),
-              linear-gradient(90deg, transparent 40%, rgba(0, 191, 255, 0.8) 50%, transparent 60%)
+              linear-gradient(0deg, transparent 35%, rgba(255, 215, 0, 1) 50%, transparent 65%),
+              linear-gradient(90deg, transparent 35%, rgba(255, 215, 0, 1) 50%, transparent 65%),
+              linear-gradient(0deg, transparent 35%, rgba(0, 255, 255, 1) 50%, transparent 65%),
+              linear-gradient(90deg, transparent 35%, rgba(0, 255, 255, 1) 50%, transparent 65%),
+              linear-gradient(0deg, transparent 35%, rgba(255, 105, 180, 1) 50%, transparent 65%),
+              linear-gradient(90deg, transparent 35%, rgba(255, 105, 180, 1) 50%, transparent 65%),
+              linear-gradient(0deg, transparent 35%, rgba(50, 255, 50, 1) 50%, transparent 65%),
+              linear-gradient(90deg, transparent 35%, rgba(50, 255, 50, 1) 50%, transparent 65%),
+              linear-gradient(0deg, transparent 35%, rgba(255, 69, 0, 1) 50%, transparent 65%),
+              linear-gradient(90deg, transparent 35%, rgba(255, 69, 0, 1) 50%, transparent 65%),
+              linear-gradient(0deg, transparent 35%, rgba(138, 43, 255, 1) 50%, transparent 65%),
+              linear-gradient(90deg, transparent 35%, rgba(138, 43, 255, 1) 50%, transparent 65%),
+              linear-gradient(0deg, transparent 35%, rgba(255, 20, 147, 1) 50%, transparent 65%),
+              linear-gradient(90deg, transparent 35%, rgba(255, 20, 147, 1) 50%, transparent 65%),
+              linear-gradient(0deg, transparent 35%, rgba(0, 191, 255, 1) 50%, transparent 65%),
+              linear-gradient(90deg, transparent 35%, rgba(0, 191, 255, 1) 50%, transparent 65%)
             `,
             backgroundSize: "6px 6px, 6px 6px, 8px 8px, 8px 8px, 10px 10px, 10px 10px, 12px 12px, 12px 12px, 7px 7px, 7px 7px, 9px 9px, 9px 9px, 11px 11px, 11px 11px, 13px 13px, 13px 13px",
             backgroundPosition: `
@@ -316,6 +316,12 @@ export default function PokemonCard() {
               ${20 - tiltX}% ${80 + tiltY}%, ${20 - tiltX}% ${80 + tiltY}%
             `,
             backgroundRepeat: "no-repeat",
+            filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 6px rgba(255, 215, 0, 0.6)) drop-shadow(0 0 9px rgba(0, 255, 255, 0.5))',
+            boxShadow: `
+              0 0 10px rgba(255, 215, 0, 0.4),
+              0 0 20px rgba(0, 255, 255, 0.3),
+              0 0 30px rgba(255, 105, 180, 0.2)
+            `,
           }}
         />
 
